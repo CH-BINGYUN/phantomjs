@@ -46,6 +46,7 @@ function send( req, res ){
         }
         page.open(args.url,function(status){
             if(status !== "success"){
+                res.statusCode = 500;
                 res.send(status);
             }
             else{
