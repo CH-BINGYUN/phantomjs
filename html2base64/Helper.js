@@ -14,6 +14,9 @@ function renderElement(page, selector) {
 
 function parseArgs(url){ 
   // adapted from http://stackoverflow.com/a/8486188
+  if(!url){
+    return null;
+  }
   var query = url.substr(url.indexOf("?")+1);
   var result = {};
 
@@ -24,6 +27,7 @@ function parseArgs(url){
     result[key] = decodeURIComponent(value); 
   }); 
   return result;
+  
 };
  
 function evaluate(page){

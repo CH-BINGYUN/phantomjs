@@ -23,37 +23,21 @@ app.use(function(req,res,next){
 
 
 
-app.post('/.*',function(req, res) {
-     
- 
-    var args = helper.extendObj( helper.parseArgs(req.post) , helper.parseArgs(req.url) );
-      
-	if(!args.url){
-		res.send("No URL received");
-	}
-	if(args.width && args.height){
-		page.viewportSize = {width: args.width, height: args.height};
-	}
-	page.open(args.url,function(status){
-		if(status !== "success"){
-        	res.send(status);
-		}
-		else{
-            helper.evaluate(page);
-			setTimeout(function() {  
-				var pic = helper.renderElement(page, 'body');
-		    	res.send(pic);	
-			}, args.timeout || 2000);
-		}
-	});	
+app.post('.*',function(req, res) { 
+     send(req, res); 
 });
 
-app.get('/.*',function(req, res) {  
+app.get('.*',function(req, res) {  
+    send(req, res); 
+}); 
+
+
+function send( req, res ){
     try{
-        console.log( req.url );
-        var args = helper.parseArgs(req.url);
+       
+        var args = helper.extendObj( new Object(), helper.parseArgs(req.url) ,typeof(req.post)=="object" ? req.post : helper.parseArgs(req.post)  );
         
-       // console.log( args.url);
+        console.log( args.url);
         if(!args.url){
             res.send("No URL received");
         }
@@ -68,17 +52,23 @@ app.get('/.*',function(req, res) {
                 helper.evaluate(page); 
              
                 setTimeout(function() {   
-                    var pic = helper.renderElement(page, args.selector || 'body');
-                    res.send(pic);	  
+                    try{
+                        var pic = helper.renderElement(page, args.selector || 'body');
+                        res.send(pic);	  
+                    }catch(error){
+                        res.statusCode = 500;
+                        res.send(  error.message );	  
+                        console.log(error);
+                    } 
                 }, args.timeout || 2000);
             }
         });	
     }catch(error){
-        res.send("error");	 
+        res.statusCode = 500;
+        res.send( error.message  );	 
         console.log(error);
     }
-}); 
-
+}
 
 service  = app.listen(system.args[1] || 8000);
  
