@@ -1,0 +1,14 @@
+﻿<html>
+<head>
+<script src="jquery.min.js"></script>
+<script>
+$.post("http://127.0.0.1:7788",{ url:"http://localhost:8080/report/one_page_report_line?lineno=185", timeout:5000,selector: "#report_table"},function(data){
+          $("#oee").attr("src",data);
+          console.log(data );
+})
+</script>
+</head>
+<body>
+<img  id="oee" alt="report" src=""></img>
+</body>
+</html>
