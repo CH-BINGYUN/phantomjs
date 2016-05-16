@@ -1,17 +1,18 @@
 var webpage = require('webpage'),
     system = require('system'),
     helper = require('./Helper.js'),
-    address, selector,timeout;
+    output,address, selector,timeout;
  
 
 try{
-
+       
         address = system.args[1] ; 
-        timeout = system.args[2] ;
-        selector = system.args[3] ;
+        output = system.args[2] ;
+        timeout = system.args[3] ;
+        selector = system.args[4] ;
  
         var page = webpage.create(); 
-        page.viewportSize = {width: 1024, height: 768};
+        page.viewportSize = {width: 1600, height: 768};
         
         page.open(address,function(status){
             if(status !== "success"){ 
@@ -23,6 +24,7 @@ try{
                 setTimeout(function() {   
                     try{
                         var pic = helper.renderElement(page, selector || 'body');
+                        page.render( output );
                         console.log(pic);	
                         phantom.exit(1);                        
                     }catch(error){  	  
