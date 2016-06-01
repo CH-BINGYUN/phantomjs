@@ -4,7 +4,7 @@ function renderElement(page, selector) {
 		return document.querySelector(selector).getBoundingClientRect();
 	}, selector || 'body');
   
-    page.viewportSize = {width: dd.width, height: dd.height};
+    page.viewportSize = {width: dd.width, height: dd.bottom};
      
 	var pic = 'data:image/png;base64,' + page.renderBase64('png');
 	 
