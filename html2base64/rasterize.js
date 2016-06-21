@@ -11,7 +11,7 @@ try{
         selector = system.args[3] ;
  
         var page = webpage.create(); 
-        page.viewportSize = {width: 1600, height: 768};
+        page.viewportSize = {width: 1200, height: 768};
         
         page.open(address,function(status){
             if(status !== "success"){ 
