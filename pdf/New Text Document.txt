@@ -1,0 +1,1 @@
+phantomjs pdf.js "http://localhost:8080/productWeeklyPlan/sheetcar/4?type=group&sno=S3&page=1"   abc.pdf
