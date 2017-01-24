@@ -1,0 +1,1 @@
+phantomjs.exe D:\Project\phantomjs\testpdf\rasterize_out.js "http://w3uy006a:8089/report/one_page_report?month=2016-12" "C:\Users\uidq1210\Desktop\a.pdf" 5000 #report_table
