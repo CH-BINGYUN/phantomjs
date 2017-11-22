@@ -1,6 +1,6 @@
 var page = require('webpage').create(),
     system = require('system'),
-    address, output, size;
+    address, output, size,orientation;
 
 if (system.args.length < 3 || system.args.length > 5) {
     console.log('Usage: rasterize.js URL filename [paperwidth*paperheight|paperformat] [zoom]');
@@ -9,6 +9,7 @@ if (system.args.length < 3 || system.args.length > 5) {
 } else {
     address = system.args[1];
     output = system.args[2];
+	orientation = system.args[3];
     /*size of browser*/
    page.viewportSize = { width: 1600, height: 900 };
     /*
@@ -20,7 +21,7 @@ if (system.args.length < 3 || system.args.length > 5) {
     */
     /* ie and chrome view diffrent format of pdf */ 
     //page.settings.userAgent = 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36';
-    page.paperSize = { format: 'A4', orientation: 'landscape', margin: '0cm' };
+    page.paperSize = { format: 'A4', orientation:orientation, margin: '0cm' };
     page.zoomFactor = 1;
     page.settings.loadImages = true;
 	
